@@ -37,5 +37,4 @@
             (exec-path-from-shell-initialize))))
 
 (defun asana/post-init-exec-path-from-shell ()
-  (load "~/.emacs.d/private/asana/emacs-asana/asana.el")
-  (setq asana-mode t))
+  (load "~/.emacs.d/private/asana/emacs-asana/asana.el"))
