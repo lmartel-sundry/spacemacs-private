@@ -15,6 +15,8 @@
 (setq leo-packages
       '(
         ;; package names go here
+        crontab-mode
+        ; tide
         ))
 
 ;; List of packages to exclude.
@@ -37,31 +39,22 @@
 ;; For more info on `use-package', see readme:
 ;; https://github.com/jwiegley/use-package
 
-;; (defun leo/init-aggressive-indent ()
-;;   (use-package aggressive-indent
-;;     :init
-;;     (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode)))
+(defun leo/init-crontab-mode ()
+  (use-package crontab-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.cron\\(tab\\)?\\'" . crontab-mode)) ; *.cron, *.crontab
+    (add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode)) ; *cron.*, *crontab.*
+    ))
 
-;; (defun leo/init-clean-aindent-mode ()
-;;   (use-package clean-aindent-mode
+;; (defun leo/init-tide ()
+;;   (use-package tide
 ;;     :init
-;;     (add-hook 'prog-mode-hook 'clean-aindent-mode)))
-
-;; (defun leo/init-highlight-indentation ()
-;;   (use-package highlight-indentation
-;;     :init
-;;     (add-hook 'prog-mode-hook 'highlight-indentation-current-column-mode)))
-
-;; (defun leo/init-highlight-parentheses ()
-;;   (use-package highlight-parentheses
-;;     :init
-;;     (add-hook 'prog-mode-hook 'highlight-parentheses-mode)))
-
-;; (defun leo/init-smartparens ()
-;;   (use-package smartparens
-;;     :ensure smartparens
-;;     :config
-;;     (progn
-;;       (show-smartparens-global-mode t))
-;;     (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
-;;     (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)))
+;;     (add-hook 'typescript-mode-hook
+;;               (lambda ()
+;;                 (evil-leader/set-key-for-mode 'typescript-mode
+;;                   "mgg" 'tide-jump-to-definition
+;;                   "mhh" 'tide-documentation-at-point
+;;                   "mrr" 'tide-rename-symbol)
+;;                 (tide-setup)
+;;                 (flycheck-mode 1)
+;;                 (eldoc-mode 1)))))
