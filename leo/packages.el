@@ -16,7 +16,12 @@
       '(
         ;; package names go here
         crontab-mode
-        ; tide
+        dumb-jump
+
+	;; local extensions and dependencies
+	(extensions :location local)
+	string-inflection
+        thingatpt+ 
         ))
 
 ;; List of packages to exclude.
@@ -46,6 +51,13 @@
     (add-to-list 'auto-mode-alist '("cron\\(tab\\)?\\."    . crontab-mode)) ; *cron.*, *crontab.*
     ))
 
+(defun leo/init-dumb-jump ()
+  (use-package dumb-jump
+    :config
+    (dumb-jump-mode)
+    ;; (setq dumb-jump-default-project "~")
+    ))
+
 ;; (defun leo/init-tide ()
 ;;   (use-package tide
 ;;     :init
@@ -58,3 +70,10 @@
 ;;                 (tide-setup)
 ;;                 (flycheck-mode 1)
 ;;                 (eldoc-mode 1)))))
+
+(setq leo/extensions/--this-file (or load-file-name buffer-file-name))
+(defun leo/init-extensions ()
+  (load (expand-file-name "./local/extensions/extensions.el" (file-name-directory leo/extensions/--this-file))))
+;; Dependencies of extensions.el
+(defun leo/init-thingatpt+ () (use-package thingatpt+))
+(defun leo/init-string-inflection () (use-package string-inflection))
