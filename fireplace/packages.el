@@ -15,6 +15,7 @@
 (setq fireplace-packages
     '(
       ;; package names go here
+      (emacs-fireplace :location local)
       ))
 
 ;; List of packages to exclude.
@@ -29,3 +30,7 @@
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:
 ;; https://github.com/jwiegley/use-package
+
+(setq fireplace/--this-file (or load-file-name buffer-file-name))
+(defun fireplace/init-emacs-fireplace ()
+  (load (expand-file-name "./local/emacs-fireplace/fireplace.el" (file-name-directory fireplace/--this-file))))
