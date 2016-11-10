@@ -15,7 +15,9 @@
 (setq asana-packages
     '(
       ;; package names go here
-	exec-path-from-shell
+      exec-path-from-shell
+
+      (emacs-asana :location local)
       ))
 
 ;; List of packages to exclude.
@@ -36,6 +38,8 @@
     :init (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize))))
 
+
+(setq emacs-asana/--this-file (or load-file-name buffer-file-name))
 (defun asana/post-init-exec-path-from-shell ()
-  (load "~/.emacs.d/private/asana/emacs-asana/asana.el")
+  (load (expand-file-name "./local/emacs-asana/asana.el" (file-name-directory emacs-asana/--this-file)))
   (global-asana-mode 1))

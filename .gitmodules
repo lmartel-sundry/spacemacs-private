@@ -1,3 +1,0 @@
-[submodule "asana/emacs-asana"]
-	path = asana/emacs-asana
-	url = git@github.com:lmartel/emacs-asana.git
